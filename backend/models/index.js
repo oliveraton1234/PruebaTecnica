@@ -2,17 +2,27 @@
 const Sequelize = require('sequelize');
 const dbConfig = require('../config/db.config');
 
-const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
-    host: dbConfig.HOST,
+const sequelize = new Sequelize(dbConfig.URL , {
     dialect: dbConfig.dialect,
-    operatorsAliases: 0,
 
+    dialectOptions: {
+        ssl: {
+            require: true,
+            rejectUnauthorized: false,
+        },
+    },
     pool: {
         max: dbConfig.pool.max,
         min: dbConfig.pool.min,
         acquire: dbConfig.pool.acquire,
         idle: dbConfig.pool.idle
     }
+});
+
+sequelize.sync({ force: false }).then(() => {
+        console.log("Base de datos sincronizada");
+    }).catch((error) => {
+        console.error("Error al sincronizar la base de datos:", error);
 });
 
 const db = {};

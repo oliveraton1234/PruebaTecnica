@@ -13,7 +13,7 @@ Este proyecto es un sistema de gestión de usuarios con autenticación, desarrol
     ``` npm i ```
 
 ### 3. Configuracion para postgress
-    La configuracion para la base de datos esta en config/db.config.js
+    La base de datos se encuentrra en la nube por lo que solo deberas agregar el archivo .env
 
 ### 4. Seeders
     Para inicializar los Seeders correo el comando 
